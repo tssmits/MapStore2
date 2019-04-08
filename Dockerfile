@@ -17,7 +17,7 @@ RUN if [ "$TOMCAT_EXTRAS" = false ]; then \
     fi
 
 # Add war files to be deployed
-COPY docker/*.war "${CATALINA_BASE}/webapps/"
+COPY web/target/mapstore.war "${CATALINA_BASE}/webapps/"
 
 # Geostore externalization template. Disabled by default
 COPY docker/geostore-datasource-ovr.properties "${CATALINA_BASE}/conf/"
