@@ -7,7 +7,7 @@
  */
 const React = require('react');
 const PropTypes = require('prop-types');
-const src = require("./attribution/geosolutions-brand-sm.png");
+const src = require("./attribution/stratopo-icon-128.png");
 const assign = require('object-assign');
 
 class Attribution extends React.Component {
@@ -36,8 +36,8 @@ module.exports = {
         NavMenu: {
             tool: (props) => ({
                 position: 0,
-                label: props.label || 'GeoSolutions',
-                href: props.href || 'https://www.geo-solutions.it/',
+                label: props.label || 'StraTopo',
+                href: props.href || 'https://www.stratopo.nl/',
                 img: props.src && <img className="customer-logo" src={props.src} height="30" /> || <img className="customer-logo" src={src} height="30" />,
                 logo: true
             })
