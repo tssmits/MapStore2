@@ -1,0 +1,3 @@
+*
+!docker/geostore-datasource-ovr.properties
+!web/target/mapstore.war
