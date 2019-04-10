@@ -18,3 +18,7 @@ _site
 docs/developer-guide/reference/
 web/client/mapstore/docs/
 web/docs
+geostore/*
+!geostore/.keep
+web/overlays/
+geostore/

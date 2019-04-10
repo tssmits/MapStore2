@@ -8,21 +8,23 @@ RUN  apk update \
 
 # Tomcat specific options
 ENV CATALINA_BASE "$CATALINA_HOME"
-ENV JAVA_OPTS="${JAVA_OPTS}  -Xms512m -Xmx512m -XX:MaxPermSize=128m"
+ENV JAVA_OPTS="$JAVA_OPTS  -Xms512m -Xmx512m -XX:MaxPermSize=128m"
 
 # Optionally remove Tomcat manager, docs, and examples
 ARG TOMCAT_EXTRAS=false
 RUN if [ "$TOMCAT_EXTRAS" = false ]; then \
-      find "${CATALINA_BASE}/webapps/" -delete; \
+      find "$CATALINA_BASE/webapps/" -delete; \
     fi
 
 # Add war files to be deployed
-COPY web/target/mapstore.war "${CATALINA_BASE}/webapps/"
+COPY web/target/mapstore.war "$CATALINA_BASE/webapps/"
 
 # Geostore externalization template. Disabled by default
-COPY docker/geostore-datasource-ovr.properties "${CATALINA_BASE}/conf/"
-ARG GEOSTORE_OVR_OPT=""
-ENV JAVA_OPTS="${JAVA_OPTS} ${GEOSTORE_OVR_OPT}"
+COPY docker/geostore-datasource-ovr.properties "$CATALINA_BASE/conf/"
+ARG GEOSTORE_OVR_OPT="-Dgeostore-ovr=file://$CATALINA_BASE/conf/geostore-datasource-ovr.properties"
+ENV JAVA_OPTS="$JAVA_OPTS $GEOSTORE_OVR_OPT"
+
+RUN mkdir -p /opt/geostore
 
 # Set variable to better handle terminal commands
 ENV TERM xterm
